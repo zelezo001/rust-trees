@@ -17,12 +17,12 @@ fn search_benchmark() {
     for count in TEST_NODE_COUNTS {
         let mut avl_tree = AVL::new();
         for i in 0..count {
-            avl_tree.insert(i);
+            avl_tree.insert(i, i);
         }
         run_test("AVL", count, || { || { avl_search_test(count, &avl_tree) } });
         let mut rb_tree = RedBlack::new();
         for i in 0..count {
-            rb_tree.insert(i);
+            rb_tree.insert(i, i);
         }
         run_test("RedBlack", count, || { || { rb_search_test(count, &rb_tree) } });
     }
@@ -42,39 +42,39 @@ fn insertion_benchmark() {
 fn rb_insert_test(count: u64) {
     let mut tree = RedBlack::new();
     for i in 0..count {
-        tree.insert(i);
+        tree.insert(i, i);
     }
 }
 
 fn avl_insert_test(count: u64) {
     let mut tree = AVL::new();
     for i in 0..count {
-        tree.insert(i);
+        tree.insert(i, i);
     }
 }
 
 
-fn rb_search_test(count: u64, tree: &RedBlack<u64>) {
+fn rb_search_test(count: u64, tree: &RedBlack<u64, u64>) {
     for i in 0..count {
         tree.find(&i);
     }
 }
 
-fn avl_search_test(count: u64, tree: &AVL<u64>) {
+fn avl_search_test(count: u64, tree: &AVL<u64, u64>) {
     for i in 0..count {
         tree.find(&i);
     }
 }
 
 
-fn rb_deletion_test(count: u64, mut tree: RedBlack<u64>) {
+fn rb_deletion_test(count: u64, mut tree: RedBlack<u64, u64>) {
     for i in 0..count {
         tree.remove(&i);
     }
 }
 
-fn avl_deletion_test(count: u64, mut tree: AVL<u64>) {
-    for i in 0..count {
+fn avl_deletion_test(count: u64, mut tree: AVL<u64, u64>) {
+    for i in (0..count) {
         tree.remove(&i);
     }
 }
@@ -85,14 +85,14 @@ fn deletion_benchmark() {
         run_test("AVL", count, || {
             let mut avl_tree = AVL::new();
             for i in 0..count {
-                avl_tree.insert(i);
+                avl_tree.insert(i, i);
             }
             || { avl_deletion_test(count, avl_tree) }
         });
         run_test("RedBlack", count, || {
             let mut rb_tree = RedBlack::new();
             for i in 0..count {
-                rb_tree.insert(i);
+                rb_tree.insert(i, i);
             }
             || {
                 rb_deletion_test(count, rb_tree)
