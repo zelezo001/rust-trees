@@ -265,7 +265,7 @@ case.
    ```
        P             P     
       / \           / \    
-     S   N   =>    D   N    
+     S   N   =>    C   N    
     / \           /        
    D   C         S     
    ```
