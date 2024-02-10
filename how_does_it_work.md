@@ -258,16 +258,17 @@ of parent and sibling.
    D   C            C   N 
    ```
 
-Last possible state of subtree is that D is black and therefore empty child (it would be violation of rule 4) and C is
-red. We can perform rotation and wrap colors of sibling and D. Now we can restore properties of the tree with previous
-case.
+Last possible state of subtree is that D is black and and C is red. 
+We can perform rotation and swap colors of sibling and D. Now we transformed three into previous case and restore balance as mentioned before.
 
    ```
        P             P     
       / \           / \    
      S   N   =>    C   N    
-    / \           /        
-   D   C         S     
+    / \           / \       
+   D   C         S   B  
+      / \       / \
+     A   B     D   A
    ```
 
 --------------
